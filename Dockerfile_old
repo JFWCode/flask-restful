@@ -1,0 +1,18 @@
+FROM python:3.8.0
+
+LABEL maintainer="iAuto"
+
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+ADD requirements.txt /
+
+RUN pip install -r /requirements.txt
+
+ADD src /src
+
+EXPOSE 5000
+
+WORKDIR /
+
+#ENTRYPOINT ["/bin/bash"]
+CMD ["python3", "-m", "src.run", "--host=0.0.0.0"]
